@@ -18,7 +18,7 @@ export default function ArticlesList() {
     return <div>loading...</div>;
   }
 
-  if (data) {
+  if (data?.articles) {
     return (
       <section>
         <h3 className="capitalize text-xl font-semibold my-10">
