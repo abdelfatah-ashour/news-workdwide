@@ -7,7 +7,7 @@ const appKey = process.env.NEXT_APP_API_KEY!;
 
 export async function getArticles() {
   const result = await new Api().get<{ articles: Article[] }>(
-    `/top-headlines?country=us&sortBy=publishedAt&pageSize=20&apiKey=${appKey}`
+    `/top-headlines?category=sports&sortBy=publishedAt&pageSize=20&apiKey=${appKey}`
   );
 
   return result;
@@ -15,7 +15,7 @@ export async function getArticles() {
 
 export async function getArticleBySlug(slug: string) {
   const result = await new Api().get<{ articles: Article[] }>(
-    `/top-headlines?country=us&q=${slug}&apiKey=${appKey}`
+    `/top-headlines?q=${slug}&category=sports&sortBy=publishedAt&pageSize=20&apiKey=${appKey}`
   );
 
   return result;

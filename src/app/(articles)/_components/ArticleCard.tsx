@@ -8,7 +8,7 @@ export default function ArticleCard({ article }: { article: Article }) {
       href={{
         pathname: `/article`,
         query: {
-          q: encodeURIComponent(article.title),
+          q: encodeURIComponent(article.title.slice(0, 20)),
         },
       }}
       prefetch={true}

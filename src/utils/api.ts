@@ -8,6 +8,8 @@ export default class Api {
    * @template T - The type of data expected to be fetched.
    */
   async get<T>(url: string) {
+    console.log(`${apiUrl}${url}`);
+
     return await fetch(`${apiUrl}${url}`, {
       method: "GET",
       headers: {
