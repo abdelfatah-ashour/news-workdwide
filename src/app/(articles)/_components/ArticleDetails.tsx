@@ -49,9 +49,9 @@ export default function ArticleDetails({ slug }: { slug: string }) {
               src={article?.urlToImage}
               alt={article?.title}
               fill
-              sizes="50vw"
+              sizes="100vw"
               loading="lazy"
-              className="w-full h-full object-cover rounded-xl"
+              className="w-full h-auto object-cover rounded-xl"
             />
           </div>
         ) : null}

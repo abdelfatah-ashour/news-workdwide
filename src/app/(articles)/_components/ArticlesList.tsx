@@ -21,7 +21,7 @@ export default function ArticlesList() {
   if (data?.articles) {
     return (
       <section>
-        <h3 className="capitalize text-xl font-semibold my-10">
+        <h3 className="capitalize text-xl font-semibold py-10">
           top headlines
         </h3>
         <div className="grid grid-cols-12 gap-6">
