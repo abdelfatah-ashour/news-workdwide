@@ -13,20 +13,15 @@ export default function ArticleCard({ article }: { article: Article }) {
       }}
       prefetch={true}
     >
-      <div className="w-full flex flex-col border shadow rounded-md">
+      <div className="w-full flex flex-col border shadow rounded-md bg-white">
         {article.urlToImage ? (
-          <div className="w-full relative pt-[100%]">
+          <div className="w-full relative h-[250px] md:h-[290px] lg:h-[320px] overflow-hidden">
             <Image
-              src={article.urlToImage}
-              alt={article.title}
-              // objectFit="cover"
+              src={article?.urlToImage}
+              alt={article?.title}
               fill
-              sizes="25vw"
-              style={{
-                objectFit: "cover",
-              }}
-              loading="lazy"
-              className="w-full h-60 md:h-52 lg:h-full top-0 left-0 object-cover rounded-tl-md rounded-tr-md"
+              sizes="100vw"
+              className="w-full h-auto object-cover rounded-tl-md rounded-tr-md hover:scale-110 hover:transition-transform hover:duration-200"
             />
           </div>
         ) : null}

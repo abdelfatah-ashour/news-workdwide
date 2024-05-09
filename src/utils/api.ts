@@ -8,18 +8,16 @@ export default class Api {
    * @template T - The type of data expected to be fetched.
    */
   async get<T>(url: string) {
-    console.log(`${apiUrl}${url}`);
-
-    return await fetch(`${apiUrl}${url}`, {
+    const result = await fetch(`${apiUrl}${url}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
       },
-    })
-      .then((res) => res.json())
-      .then((res) => {
-        return res as T;
-      })
-      .catch(() => null);
+    });
+    if (result.ok) {
+      return result.json() as T;
+    } else {
+      throw new Error("something went wrong");
+    }
   }
 }

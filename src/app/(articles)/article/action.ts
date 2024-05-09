@@ -5,14 +5,6 @@ import { Readability } from "@mozilla/readability";
 import { JSDOM } from "jsdom";
 const appKey = process.env.NEXT_APP_API_KEY!;
 
-export async function getArticles() {
-  const result = await new Api().get<{ articles: Article[] }>(
-    `/everything?q="ALL"&pageSize=32&apiKey=${appKey}`
-  );
-
-  return result;
-}
-
 export async function getArticleBySlug(slug: string) {
   const result = await new Api().get<{ articles: Article[] }>(
     `/everything?q=${slug}&pageSize=1&apiKey=${appKey}`

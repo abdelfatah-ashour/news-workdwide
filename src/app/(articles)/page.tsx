@@ -1,13 +1,17 @@
-import { getArticles } from "@/services/ArticleApi";
-import {
-  dehydrate,
-  HydrationBoundary,
-  QueryClient,
-} from "@tanstack/react-query";
+import { getArticles } from "@/app/(articles)/action";
+import getQueryClient from "@/utils/getQueryClient";
+import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
+import { Metadata } from "next";
 import ArticlesList from "./_components/ArticlesList";
 
+export const metadata: Metadata = {
+  title: "Top headlines",
+  description: "Top headlines",
+};
+
 export default async function Home() {
-  const queryClient = new QueryClient();
+  const articles = await getArticles();
+  const queryClient = getQueryClient();
 
   await queryClient.prefetchQuery({
     queryKey: ["all-articles"],
@@ -17,7 +21,7 @@ export default async function Home() {
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
       <main className="container min-h-screen">
-        <ArticlesList />
+        <ArticlesList articles={articles?.articles || null} />
       </main>
     </HydrationBoundary>
   );

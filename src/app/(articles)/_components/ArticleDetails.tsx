@@ -1,20 +1,26 @@
 "use client";
-import { getArticleBySlug, getContent } from "@/services/ArticleApi";
+import { Article } from "@/@types/model";
 import { useQuery } from "@tanstack/react-query";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
+import { getArticleBySlug, getContent } from "../article/action";
 
-export default function ArticleDetails({ slug }: { slug: string }) {
+export default function ArticleDetails({
+  slug,
+  articles,
+}: {
+  slug: string;
+  articles: Article[] | null;
+}) {
   const [content, setContent] = useState<string>("");
   const router = useRouter();
 
   const { data, isLoading } = useQuery({
     queryKey: ["article"],
     queryFn: () => getArticleBySlug(slug),
+    initialData: { articles: articles || [] },
   });
-
-  console.log(data?.articles);
 
   const article = useMemo(() => {
     return data?.articles?.length ? data.articles[0] : null;
@@ -50,7 +56,6 @@ export default function ArticleDetails({ slug }: { slug: string }) {
               alt={article?.title}
               fill
               sizes="100vw"
-              loading="lazy"
               className="w-full h-auto object-cover rounded-xl"
             />
           </div>

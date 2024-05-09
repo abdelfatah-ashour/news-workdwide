@@ -1,24 +1,38 @@
 "use client";
 
-import { getArticles } from "@/services/ArticleApi";
+import { Article } from "@/@types/model";
+import { getArticles } from "@/app/(articles)/action";
 import { useQuery } from "@tanstack/react-query";
 import ArticleCard from "./ArticleCard";
 
-export default function ArticlesList() {
-  const { data, isLoading, isError } = useQuery({
+export default function ArticlesList({
+  articles,
+}: {
+  articles: Article[] | null;
+}) {
+  const { data, isLoading, isError, error } = useQuery({
     queryKey: ["all-articles"],
     queryFn: getArticles,
+    initialData: { articles: articles || [] },
   });
 
   if (isError) {
-    return <div>error</div>;
+    return (
+      <div className="flex justify-center items-center w-full h-full">
+        Something went wrong.
+      </div>
+    );
   }
 
   if (isLoading) {
-    return <div>loading...</div>;
+    return (
+      <div className="flex justify-center items-center w-full h-full">
+        loading...
+      </div>
+    );
   }
 
-  if (data?.articles) {
+  if (data?.articles && !isLoading && !isError) {
     return (
       <section>
         <h3 className="capitalize text-xl font-semibold py-10">
